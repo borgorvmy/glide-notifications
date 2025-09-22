@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ลงทะเบียนรับการแจ้งเตือน</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        // *** สำคัญ: เอา App ID ที่ได้จาก OneSignal มาใส่ตรงนี้ ***
+        appId: "265d396c-389f-4885-81ea-4118366ecbdf", 
+      });
+
+      // รับอีเมลจาก URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const userEmail = urlParams.get('email');
+
+      // ถ้ามีอีเมลส่งมา, ให้ผูกกับผู้ใช้งานใน OneSignal
+      if (userEmail) {
+        OneSignal.push(function() {
+          OneSignal.setExternalUserId(userEmail);
+        });
+      }
+    });
+  </script>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    h1 { color: #333; }
+    p { color: #666; }
+  </style>
+</head>
+<body>
+  <h1>ลงทะเบียนรับการแจ้งเตือน</h1>
+  <p>เบราว์เซอร์ของคุณจะถามเพื่อขออนุญาตส่งการแจ้งเตือน กรุณากด "อนุญาต" เพื่อรับข่าวสารล่าสุดจากแอปของเรา</p>
+  <p>เมื่อเสร็จแล้ว คุณสามารถปิดหน้านี้ได้เลย</p>
+</body>
+</html>
